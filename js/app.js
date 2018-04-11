@@ -66,7 +66,7 @@ function newBoard() {
   clearInterval(time);
 
   // reset star rating
-  star = document.getElementsByClassName('fa-star');
+  let star = document.getElementsByClassName('fa-star');
   star[0].style.color = 'black';
   star[1].style.color = 'black';
   star[2].style.color = 'black';
@@ -161,7 +161,7 @@ function countTime() {
   second = 1;
   time = setInterval(function() {
     timer.innerHTML = minute + ' min  ' + second + ' sec';
-    second++
+    second++;
     if (second == 60) {
       minute++;
       second = 0;
