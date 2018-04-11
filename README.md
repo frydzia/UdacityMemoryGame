@@ -18,6 +18,10 @@ Each turn:
 
 Load index.html file in browser.
 
+## Dependencies
+
+The game was built using ES6 JavaScript and stylized using CSS. No external libraries were used.
+
 ## Contributing
 
 The project was based on the starter code for Udacity students: https://github.com/udacity/fend-project-memory-game
