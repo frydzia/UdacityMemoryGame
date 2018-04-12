@@ -17,6 +17,8 @@ let time;
 // declare variable for stop / unlock the possibility of opening other cards
 let busy = false;
 
+let coutnMove = false;
+
 // declare variables for congratulations popup
 let popUp = document.getElementById('win-board');
 
@@ -45,7 +47,7 @@ function newBoard() {
   // clean board, close cards
   let cardList = document.getElementsByClassName('card');
   for (let i = 0; i < cards.length; i++) {
-    cardList[i].classList.remove('open', 'show', 'match');
+    cardList[i].classList.remove('open', 'show', 'match', 'dontCount');
   };
   // shuffle cards
   shuffle(cards);
@@ -78,19 +80,25 @@ function newBoard() {
 // display the card's symbol when card is clicked
 let cardClicked = function() {
   let clicked = this;
+  
+  if (clicked.classList.contains('dontCount') === false) {
+    if (!busy) {
+      clicked.classList.add('open');
+      clicked.classList.add('show');
 
-  if (!busy) {
-    clicked.classList.add('open');
-    clicked.classList.add('show');
-    cardOpen(); // compare cards
-    moveNumber(); // count moves
-    starRating(); // issue a star rating
-    // measure time
-    if (!startTimer) {
-      countTime();
-      startTimer = true;
+      cardOpen(); // compare cards
+      if (clicked.classList.contains('dontCount') === false) {
+        moveNumber(); // count moves
+      }
+      clicked.classList.add('dontCount');
+      starRating(); // issue a star rating
+      // measure time
+      if (!startTimer) {
+        countTime();
+        startTimer = true;
+      };
+      congratulationsPopUp(); // show congratulations if the player won
     };
-    congratulationsPopUp(); // show congratulations if the player won
   };
 };
 
@@ -113,8 +121,8 @@ function cardOpen() {
 function matched() {
   let openCards = document.getElementsByClassName('open');
 
-  openCards[0].classList.add('match');
-  openCards[1].classList.add('match');
+  openCards[0].classList.add('match', 'dontCount');
+  openCards[1].classList.add('match', 'dontCount');
   openCards[1].classList.remove('show', 'open');
   openCards[0].classList.remove('show', 'open');
   busy = false; // unlock the possibility to open the remaining cards
@@ -125,8 +133,8 @@ function unmatched() {
   setTimeout(function() {
     let listOfOpenCards = document.getElementsByClassName('open');
 
-    listOfOpenCards[1].classList.remove('show', 'open');
-    listOfOpenCards[0].classList.remove('show', 'open');
+    listOfOpenCards[1].classList.remove('show', 'open', 'dontCount');
+    listOfOpenCards[0].classList.remove('show', 'open', 'dontCount');
     busy = false; // unlock the possibility to open the remaining cards
   }, 600);
 }
