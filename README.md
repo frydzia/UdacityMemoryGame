@@ -18,6 +18,8 @@ Each turn:
 
 Load index.html file in browser.
 
+You can also see the application [here](https://frydzia.github.io/UdacityMemoryGame/).
+
 ## Dependencies
 
 The game was built using ES6 JavaScript and stylized using CSS. No external libraries were used.
